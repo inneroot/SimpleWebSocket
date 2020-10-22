@@ -1,7 +1,7 @@
 const express = require('express');
 const WebSocket = require('ws');
-
 const app = express();
+const PORT = 8000
 
 const WebSocketServer = new WebSocket.Server({ noServer: true });
 
@@ -30,11 +30,16 @@ WebSocketServer.on('error', e => console.log(e.message))
 // `server` is a vanilla Node.js HTTP server, so use
 // the same WebSocket upgrade process described here:
 // https://www.npmjs.com/package/WebSocket#multiple-servers-sharing-a-single-https-server
-const server = app.listen(8000);
-console.log('Server Start.')
+
+// `server` is a vanilla Node.js HTTP server, so use
+// the same WebSocket upgrade process described here:
+// https://www.npmjs.com/package/WebSocket#multiple-servers-sharing-a-single-https-server
+const server = app.listen(PORT);
 
 server.on('upgrade', (request, socket, head) => {
   WebSocketServer.handleUpgrade(request, socket, head, socket => {
     WebSocketServer.emit('connection', socket, request);
   });
 });
+
+console.log(`WebSocket server is running on port ${PORT}`)
