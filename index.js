@@ -27,13 +27,7 @@ WebSocketServer.on('close', () => {
   clearInterval(stopInterval)
   console.log('connection closed')})
 WebSocketServer.on('error', e => console.log(e.message))
-// `server` is a vanilla Node.js HTTP server, so use
-// the same WebSocket upgrade process described here:
-// https://www.npmjs.com/package/WebSocket#multiple-servers-sharing-a-single-https-server
 
-// `server` is a vanilla Node.js HTTP server, so use
-// the same WebSocket upgrade process described here:
-// https://www.npmjs.com/package/WebSocket#multiple-servers-sharing-a-single-https-server
 const server = app.listen(PORT);
 
 server.on('upgrade', (request, socket, head) => {
